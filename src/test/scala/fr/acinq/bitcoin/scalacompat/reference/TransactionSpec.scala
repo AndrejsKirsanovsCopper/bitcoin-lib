@@ -24,15 +24,13 @@ object TransactionSpec {
         val prevoutMap = collection.mutable.HashMap.empty[OutPoint, ByteVector]
         val prevamountMap = collection.mutable.HashMap.empty[OutPoint, Satoshi]
         m.map {
-          case JArray(List(JString(hash), JInt(index), JString(scriptPubKey))) => {
+          case JArray(List(JString(txid), JInt(index), JString(scriptPubKey))) =>
             val prevoutScript = parseFromText(scriptPubKey)
-            prevoutMap += OutPoint(ByteVector32(ByteVector.fromValidHex(hash).reverse), index.toLong) -> prevoutScript
-          }
-          case JArray(List(JString(hash), JInt(index), JString(scriptPubKey), JInt(amount))) => {
+            prevoutMap += OutPoint(TxId.fromValidHex(txid), index.toLong) -> prevoutScript
+          case JArray(List(JString(txid), JInt(index), JString(scriptPubKey), JInt(amount))) =>
             val prevoutScript = parseFromText(scriptPubKey)
-            prevoutMap += OutPoint(ByteVector32(ByteVector.fromValidHex(hash).reverse), index.toLong) -> prevoutScript
-            prevamountMap += OutPoint(ByteVector32(ByteVector.fromValidHex(hash).reverse), index.toLong) -> Satoshi(amount.toLong)
-          }
+            prevoutMap += OutPoint(TxId.fromValidHex(txid), index.toLong) -> prevoutScript
+            prevamountMap += OutPoint(TxId.fromValidHex(txid), index.toLong) -> Satoshi(amount.toLong)
           case _ => ()
         }
 
@@ -55,7 +53,6 @@ object TransactionSpec {
   }
 
   def process(stream: InputStream, valid: Boolean): Unit = {
-    implicit val format = DefaultFormats
     val json = JsonMethods.parse(new InputStreamReader(stream))
     process(json, valid)
   }
@@ -67,11 +64,11 @@ class TransactionSpec extends FlatSpec with Matchers {
 
   "Bitcoins library" should "pass reference tx valid tests" in {
     val stream = classOf[scalacompat.reference.TransactionSpec].getResourceAsStream("/data/tx_valid.json")
-    process(stream, true)
+    process(stream, valid = true)
   }
 
   it should "pass reference tx invalid tests" in {
     val stream = classOf[scalacompat.reference.TransactionSpec].getResourceAsStream("/data/tx_invalid.json")
-    process(stream, false)
+    process(stream, valid = false)
   }
 }
