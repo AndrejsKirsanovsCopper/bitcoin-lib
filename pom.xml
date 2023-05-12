@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>fr.acinq</groupId>
-    <artifactId>bitcoin-lib_2.13</artifactId>
+    <groupId>co.copperexchange</groupId>
+    <artifactId>verge-lib_2.13</artifactId>
     <packaging>jar</packaging>
     <version>0.18</version>
-    <description>Simple Scala Bitcoin library</description>
-    <url>https://github.com/ACINQ/bitcoin-lib</url>
-    <name>bitcoin-lib</name>
+    <description>Simple Scala Verge library</description>
+    <url>https://github.com/APshenkin/verge-lib</url>
+    <name>verge-lib</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -16,34 +16,18 @@
 
     <licenses>
         <license>
-            <url>https://raw.github.com/ACINQ/bitcoin-lib/master/LICENSE</url>
+            <url>https://raw.github.com/copperexchange/verge-lib/master/LICENSE</url>
             <name>Apache License</name>
             <distribution>repo</distribution>
         </license>
     </licenses>
 
     <scm>
-        <connection>scm:git:git@github.com:ACINQ/bitcoin-lib.git</connection>
-        <developerConnection>scm:git:git@github.com:ACINQ/bitcoin-lib.git</developerConnection>
-        <url>git@github.com:ACINQ/bitcoin-lib.git</url>
+        <connection>scm:git:git@github.com:copperexchange/verge-lib.git</connection>
+        <developerConnection>scm:git:git@github.com:copperexchange/verge-lib.git</developerConnection>
+        <url>git@github.com:copperexchange/verge-lib.git</url>
         <tag>v0.18-scala2.13</tag>
     </scm>
-
-    <developers>
-        <developer>
-            <id>sstone</id>
-        </developer>
-        <developer>
-            <id>pm47</id>
-        </developer>
-    </developers>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
 
     <build>
         <plugins>
